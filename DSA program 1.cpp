@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 int main() {
-	char *subjects[7]={"Discrete Structures","Data Communication","DSA","Cloud Computing",
+	string subjects[7]={"Discrete Structures","Data Communication","DSA","Cloud Computing",
 	"App development using java","Unix & Shell Modelling","Web Development"};
 	
 	cout<<subjects[0]<<"\n";
