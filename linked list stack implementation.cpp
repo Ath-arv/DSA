@@ -1,21 +1,28 @@
 #include <iostream>
 using namespace std;
-struct stack
+struct node
 {
     int data;
-    struct stack *link;
+    struct node *link;
 }*TOP=NULL;
 void push(int val)
 {
-    struct stack *newnode;
-    newnode=(struct stack*)malloc(sizeof(struct stack));
-    newnode->data=val;
-    if(TOP==NULL)
-    newnode->link=NULL;
+    struct node *newnode;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    
+    if(newnode==NULL)
+    {
+    cout<<"stack overflow!";
+    exit (1);
+    }
     else
+    {newnode->data=val;
+    newnode->link=NULL;
     newnode->link=TOP;
     TOP=newnode;
+    }
 }
+
 int pop()
 {   int d=0;
     if(TOP==NULL)
@@ -25,7 +32,7 @@ int pop()
     }
     else
     {
-        struct stack *t;
+        struct node *t;
         t=TOP;
         TOP=TOP->link;
         d=t->data;
@@ -36,34 +43,33 @@ int pop()
 void print()
 {
     
-    struct stack *temp;
+    struct node *temp;
     temp=TOP;
     if(TOP==NULL)
     {cout<<"Stack underflow!!!";
-    
+    exit(1);
     }
     while(temp->link!=NULL)
-    {cout<<temp->data<<"==>";
+    {cout<<temp->data<<"===>";
       temp=temp->link;
     }
-    cout<<"\n";
+    cout<<temp->data;
 }
-void peak()
-  { if(TOP=NULL)
-    {cout<<"Stack underflow!!";
-    }
-    else
-    { cout<<TOP->data;
-    }
+int peak()
+  { if(TOP==NULL)
+    cout<<"Stack underflow!!";
+    return TOP->data;
   }
 
 int main() 
-{int choice,val;
-cout<<"\n";
+{
+    int choice,val;
+
+        
+    while(1)
+    {   cout<<"\n";
         cout<<"1.push  2.pop  3.print top element  4.Display  5.QUIT ";
         cin>>choice;
-    while(1)
-    {
         
         switch(choice)
         {
@@ -72,18 +78,20 @@ cout<<"\n";
                    cin>>val;
                    push(val); 
                    break;
-        case 2:val=pop();
+       case 2:
+                  val=pop();
                cout<<"Deleted element:"<<val;
                    break;
-       case 3: cout<<"The top most element is:";
-                   peak();
+       case 3: cout<<"The top most element is:"<< peak();
+                   
                    break;
        case 4: cout<<"The elements are:";
                    print();
                    break;
        case 5: cout<<"QUIT";
-       exit(1);
-       break;
+                exit(1);
+                break;
+      
        default:cout<<"Wrong choice";
         }
        
